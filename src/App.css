@@ -1,0 +1,38 @@
+::-webkit-scrollbar {
+  width: 3px;
+  background: transparent;
+}
+
+.movie-app > .row {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  flex-wrap: nowrap;
+}
+
+.image-container {
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.image-container:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.overlay {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  transition: 0.5s ease;
+  opacity: 0;
+  font-size: 15px;
+  padding: 10px;
+  text-align: center;
+}
+
+
+
+.image-container:hover .overlay  {
+  opacity: 1;
+}
+
