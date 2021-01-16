@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Dialog, DialogContent, DialogTitle, Grid, IconButton, Tooltip, Typography, withStyles } from '@material-ui/core'
+import { Dialog, DialogContent, DialogTitle, Grid, IconButton, Tooltip, Typography } from '@material-ui/core'
 import { Close, ExpandMore } from '@material-ui/icons'
 
 
@@ -21,7 +21,7 @@ class Movie extends Component {
 
     }
     getMovieDetails = async (movieId) => {
-        const url = `http://www.omdbapi.com/?i=${movieId}&apikey=f441d06c`;
+        const url = `https://www.omdbapi.com/?i=${movieId}&apikey=f441d06c`;
         const response = await fetch(url);
         const responseJson = await response.json();
         this.setState({ movieDetails: responseJson });
@@ -32,7 +32,7 @@ class Movie extends Component {
         position: "relative",
     })
     render() {
-        const { Title, Year, ImdbID, Type, Poster } = this.props.movie;
+        const { Title, Year, Poster } = this.props.movie;
         const {
 
             Rated,
@@ -52,8 +52,11 @@ class Movie extends Component {
         return (
             <Fragment >
                 <Tooltip title="movie details">
+
                     <IconButton onClick={this.handleOpen} color="primary">
+
                         <ExpandMore></ExpandMore>
+
                     </IconButton>
                 </Tooltip>
                 <Dialog open={this.state.open} onClose={this.handleClose} fullWidth >
@@ -66,7 +69,7 @@ class Movie extends Component {
                         </Tooltip>
                     </DialogTitle>
                     <DialogContent style={{ alignContent: 'center', padding: '20', color: "white", background: "rgba(0,0,0,0.8)" }} >
-                        <Grid container sm={12}>
+                        <Grid container>
                             <Grid item sm={5}>
                                 <img src={Poster} alt="movie" width={200} height={300}></img>
 

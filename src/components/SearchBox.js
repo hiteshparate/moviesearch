@@ -9,7 +9,9 @@ const SearchBox = (props) => {
                 placeholder="search movies"
                 value={props.SearchValue}
                 onChange= {(event)=> props.setSearchValue(event.target.value)}
-                />
+                onKeyPress = {(event)=> event.key === 'Enter' ? props.setSearchValue(event.target.value) : null}
+                ></input>
+
         </div>
     )
 }

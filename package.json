@@ -20,9 +20,8 @@
   "homepage": "https://hiteshparate.github.io/moviesearch",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts --max_old_space_size=4096 build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
-    "precommit": "lint-staged",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"

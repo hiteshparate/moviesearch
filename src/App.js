@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
 import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
-import Movie from './components/Movie';
 
 
 function App() {
@@ -16,16 +15,13 @@ function App() {
 
   const getMovies = async (SearchValue) => {
 
-    const url = `http://www.omdbapi.com/?s=${SearchValue}&apikey=f441d06c`;
+    const url = `https://www.omdbapi.com/?s=${SearchValue}&apikey=f441d06c`;
 
     const response = await fetch(url);
     const responseJson = await response.json();
     // console.log(responseJson);
     if (responseJson.Search)
       setMovies(responseJson.Search);
-
-
-
 
   }
 
@@ -45,11 +41,19 @@ function App() {
     localStorage.setItem('favourite-movie', JSON.stringify(items));
   }
   const addFavoriteMovie = (movie) => {
-    if (!favourites.includes(movie)) {
-      const newFavoriteList = [...favourites, movie];
-      setFavourites(newFavoriteList);
-      saveToLocalStorage(newFavoriteList);
+    console.log(favourites);
+    if (favourites === null) {
+      setFavourites([movie]);
+      saveToLocalStorage([movie]);
     }
+    else {
+      if (!favourites.includes(movie)) {
+        const newFavoriteList = [movie, ...favourites];
+        setFavourites(newFavoriteList);
+        saveToLocalStorage(newFavoriteList);
+      }
+    }
+
 
   }
   const removeFavouriteMovie = (movie) => {
@@ -57,6 +61,9 @@ function App() {
     setFavourites(newFavourteList);
     saveToLocalStorage(newFavourteList);
   }
+
+  const renderMovies = !movies ? (<p>No movies </p>) : (<MovieList movies={movies} handleFavouriteClick={addFavoriteMovie} fav={true} ></MovieList>);
+  const renderFavMovies = !favourites ? (<p>No movies </p>) : (<MovieList movies={favourites} handleremoveFavouriteClick={removeFavouriteMovie} fav={false} ></MovieList>);
   return (
     <div className="container-fluid movie-app">
       <div className="row d-flex align-items-center mt-4 mb-4">
@@ -64,7 +71,7 @@ function App() {
         <SearchBox SearchValue={SearchValue} setSearchValue={setSearchValue}></SearchBox>
       </div>
       <div className="row">
-        <MovieList movies={movies} handleFavouriteClick={addFavoriteMovie} fav={true} ></MovieList>
+        {renderMovies}
         {/* <Movie></Movie> */}
       </div>
 
@@ -73,7 +80,7 @@ function App() {
 
       </div>
       <div className="row">
-        <MovieList movies={favourites} handleremoveFavouriteClick={removeFavouriteMovie} fav={false} ></MovieList>
+        {renderFavMovies}
       </div>
 
     </div>
