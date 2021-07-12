@@ -1,3 +1,6 @@
+
+
+
 # moviesearch
 * Web application for finding movies
 * Find movies by simply searching in the search menu
@@ -15,7 +18,8 @@
 * OMDB api
 
 # Video
-- 
+- https://user-images.githubusercontent.com/48521519/125347782-5722e100-e329-11eb-844d-0484cf2c12d8.mp4
+
 
 # Installation
 * Download zip and extract it.
